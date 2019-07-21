@@ -1,12 +1,12 @@
 FROM alpine:3.10
 
-LABEL maintainer="Umputun <umputun@gmail.com>"
+LABEL maintainer="Artem Kolin <artemkaxboy@gmail.com>"
 
 ENV \
-    TERM=xterm-color           \
-    TIME_ZONE=America/Chicago  \
-    APP_USER=app               \
-    APP_UID=1001               \
+    TERM=xterm-color            \
+    TIME_ZONE=Asia/Novosibirsk  \
+    APP_USER=app                \
+    APP_UID=1001                \
     DOCKER_GID=999         
 
 COPY files/scripts/nop.sh /usr/bin/nop.sh

@@ -1,15 +1,15 @@
-# baseimage [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/umputun/baseimage/) [![Build Status](https://travis-ci.org/umputun/baseimage.svg?branch=master)](https://travis-ci.org/umputun/baseimage)
+# baseimage [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/artemkaxboy/baseimage/) [![Build Status](https://travis-ci.org/artemkaxboy/baseimage.svg?branch=master)](https://travis-ci.org/artemkaxboy/baseimage)
 
 _minimalist docker base image to build and deploy my services and applications._
 
 Two images included:
 
-1. go build image - `umputun/baseimage:buildgo-latest`. For build stage, includes go compiler and linters. Alpine based.
-2. base application image `umputun/baseimage:app-latest`
+1. go build image - `artemkaxboy/baseimage:buildgo-latest`. For build stage, includes go compiler and linters. Alpine based.
+2. base application image `artemkaxboy/baseimage:app-latest`
 
 ## Go Build Image
 
-Image `umputun/baseimage:buildgo-latest` intends to be used in multi-stage `Dockefile` to build go applications and services.
+Image `artemkaxboy/baseimage:buildgo-latest` intends to be used in multi-stage `Dockefile` to build go applications and services.
 
 * Relatively small, based on the official [golang:alpine](https://hub.docker.com/_/golang/) image
 * Enforces `CGO_ENABLED=0` and `GOARCH=amd64`
@@ -22,7 +22,7 @@ Image `umputun/baseimage:buildgo-latest` intends to be used in multi-stage `Dock
 
 ## Base Application Image
 
-Image `umputun/baseimage:app-latest` designed as a lightweight, ready-to-use base for various services.
+Image `artemkaxboy/baseimage:app-latest` designed as a lightweight, ready-to-use base for various services.
 It adds a few things to the regular [alpine image](https://hub.docker.com/_/alpine/).
 
 * `ENTRYPOINT /init.sh` runs `CMD` via [dumb-init](https://github.com/Yelp/dumb-init/)
@@ -36,13 +36,13 @@ It adds a few things to the regular [alpine image](https://hub.docker.com/_/alpi
 
 The container can be customized in runtime by setting environment from docker's command line or as a part of `docker-compose.yml`
 
-- `TIME_ZONE` - set container's TZ, default "America/Chicago"
+- `TIME_ZONE` - set container's TZ, default "Asia/Novosibirsk"
 - `APP_UID` - UID of internal `app` user, default 1001
 
 ## Example of multi-stage Dockerfile with baseimage:buildgo and baseimage:app
 
 ```docker
-FROM umputun/baseimage:buildgo as build
+FROM artemkaxboy/baseimage:buildgo as build
 
 WORKDIR /build
 ADD . /build
@@ -56,7 +56,7 @@ RUN \
     go build -mod=vendor -o app -ldflags "-X main.revision=$revison -s -w" .
 
 
-FROM umputun/baseimage:app
+FROM artemkaxboy/baseimage:app
 
 COPY --from=build /build/app /srv/app
 
@@ -69,4 +69,6 @@ CMD ["/srv/app", "param1", "param2]
 It will make a container running "/srv/app" (with passed params) under 'app' user.
 
 To customize both TIME_ZONE and UID - `docker run -e TIME_ZONE=America/New_York -e APP_UID=2000 <image>`
- 
+
+Great thanks to [Umputun](https://github.com/umputun) for kindly open-sourced
+ [project](https://github.com/umputun/baseimage).
