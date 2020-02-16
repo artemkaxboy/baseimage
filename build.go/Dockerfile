@@ -12,7 +12,7 @@ ENV \
 
 RUN \
     apk add --no-cache --update tzdata git bash curl && \
-    cp /usr/share/zoneinfo/America/Chicago /etc/localtime && \
+    cp /usr/share/zoneinfo/Asia/Novosibirsk /etc/localtime && \
     rm -rf /var/cache/apk/*
 
 RUN \
