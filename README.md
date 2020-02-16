@@ -1,4 +1,4 @@
-# baseimage [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/artemkaxboy/baseimage/) [![Build Status](https://travis-ci.org/artemkaxboy/baseimage.svg?branch=master)](https://travis-ci.org/artemkaxboy/baseimage)
+# baseimage [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/artemkaxboy/baseimage/) [![Actions](https://github.com/artemkaxboy/baseimage/workflows/build/badge.svg)](https://github.com/artemkaxboy/baseimage/actions)
 
 _minimalist docker base image to build and deploy my services and applications._
 
@@ -63,7 +63,7 @@ COPY --from=build /build/app /srv/app
 EXPOSE 8080
 WORKDIR /srv
 
-CMD ["/srv/app", "param1", "param2]
+CMD ["/srv/app", "param1", "param2"]
 ```
 
 It will make a container running "/srv/app" (with passed params) under 'app' user.
